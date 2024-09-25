@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Check out the code from the repository
+    - uses: actions/checkout@v4
+
+    # Set up the C++ build environment
+    - name: Set up C++ Build Environment
+      run: sudo apt-get install -y build-essential
+
+    # Build the project using g++
+    - name: Build Project
+      run: |
+        g++ -o MyFave main.cpp --std=c++17
+        ./MyFave
